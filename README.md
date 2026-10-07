@@ -3,16 +3,19 @@
 A frontend-only flight search and booking platform built for the WebEra Solutions frontend internship.
 Users can search flights, compare options, pick seats, book, pay (simulated), get a boarding pass and manage their trips.
 
-**Live demo:** https://aerolink-indol.vercel.app/
+**Live demo:** https://aerolink-indol.vercel.app
 **Demo video:** PASTE-DRIVE-OR-YOUTUBE-LINK-HERE
 
 ## Screenshots
+Dark theme (light theme is available from the toggle in the header).
+
 | | |
 |---|---|
-| ![Home](docs/screenshots/01-home.png) | ![Results](docs/screenshots/02-results.png) |
-| ![Compare](docs/screenshots/03-compare.png) | ![Seats](docs/screenshots/04-seats.png) |
-| ![Payment](docs/screenshots/05-payment.png) | ![Boarding pass](docs/screenshots/06-boarding-pass.png) |
-| ![My trips](docs/screenshots/07-my-trips.png) | ![Mobile](docs/screenshots/08-mobile.png) |
+| ![Home (dark)](docs/screenshots/01_Home.png) | ![Home (light)](docs/screenshots/14_LightMode_Home.png) |
+| ![Results](docs/screenshots/03_Results.png) | ![Compare](docs/screenshots/05_Compare.png) |
+| ![Seats](docs/screenshots/06_Seats.png) | ![Payment](docs/screenshots/08_Payment.png) |
+| ![Boarding pass](docs/screenshots/09_BoardingPass_Front.png) | ![My trips](docs/screenshots/11_MyTrips.png) |
+| ![Mobile home](docs/screenshots/12_Mobile_Home.png) | ![Mobile results](docs/screenshots/13_Mobile_Results.png) |
 
 ## Features
 **Search**
