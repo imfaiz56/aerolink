@@ -273,8 +273,8 @@ export function getPriceTrend({ from, to, date, cabin = 'economy', range = 7 }) 
 export const DEMO_SEARCH = {
   from: 'ISB',
   to: 'DXB',
-  depart: '2026-10-18',
-  return: '2026-10-25',
+ depart: addDays(new Date().toISOString().slice(0, 10), 14),
+  return: addDays(new Date().toISOString().slice(0, 10), 21),
   adults: 2,
   children: 0,
   infants: 0,
