@@ -4,7 +4,7 @@ A frontend-only flight search and booking platform built for the WebEra Solution
 Users can search flights, compare options, pick seats, book, pay (simulated), get a boarding pass and manage their trips.
 
 **Live demo:** https://aerolink-indol.vercel.app
-**Demo video:** PASTE-DRIVE-OR-YOUTUBE-LINK-HERE
+**Demo video (Linkedln):** https://lnkd.in/p/dtjQuGep
 
 ## Screenshots
 Dark theme (light theme is available from the toggle in the header).
