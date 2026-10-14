@@ -550,9 +550,10 @@ export function Manage({ b, updateBooking }) {
   const nb = { ...b, passengers: d.passengers, seats: d.seats, extraSeats: d.extraSeats, addons: d.addons, fees: (b.fees || 0) + nameFee + seatChg }
   const delta = calcTotal(nb) - calcTotal(b)
   const changed = nameFee > 0 || seatChg > 0 || JSON.stringify(d.addons) !== JSON.stringify(base)
+  const unpaid = b.payStatus === 'unpaid'
   const apply = () => {
     updateBooking(b.ref, { passengers: d.passengers, seats: d.seats, extraSeats: d.extraSeats, addons: d.addons, fees: nb.fees })
-    setSaved(delta < 0 ? `Saved. ${money(-delta)} will be refunded to your original payment method in 5–7 days.` : delta > 0 ? `Payment of ${money(delta)} received. Changes saved.` : 'Changes saved.'); setPayOpen(false)
+        setSaved(unpaid ? 'Changes saved. Your amount due is updated.' : delta < 0 ? `Saved. ${money(-delta)} will be refunded to your original payment method in 5–7 days.` : delta > 0 ? `Payment of ${money(delta)} received. Changes saved.` : 'Changes saved.'); setPayOpen(false)
   }
   const pay = (e) => {
     e.preventDefault()
@@ -581,8 +582,8 @@ export function Manage({ b, updateBooking }) {
         <select aria-label="Meal" className={input} value={d.addons.meal} onChange={(e) => up({ addons: { ...d.addons, meal: e.target.value } })}>{['Standard', 'Vegetarian', 'Halal', 'Asian'].map((x) => <option key={x}>{x}</option>)}</select>
         <label className="flex items-center gap-2"><input type="checkbox" className="accent-emerald-500" checked={d.addons.priority} onChange={() => up({ addons: { ...d.addons, priority: !d.addons.priority } })} />Priority boarding</label></div>
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl bg-surface-2 p-3">
-        <span>{!changed ? 'No changes yet' : delta > 0 ? <>Extra to pay: <b>{money(delta)}</b></> : delta < 0 ? <>Refund to you: <b className="text-success">{money(-delta)}</b></> : 'No extra charge'}</span>
-        <button type="button" className={primary} disabled={!changed || busy} onClick={() => (delta > 0 ? setPayOpen(true) : apply())}>{delta > 0 ? `Continue to pay ${money(delta)}` : 'Save changes'}</button></div>
+                <span>{!changed ? 'No changes yet' : unpaid ? <>Your amount due changes by <b>{delta < 0 ? '−' : '+'}{money(Math.abs(delta))}</b>. Nothing to pay now.</> : delta > 0 ? <>Extra to pay: <b>{money(delta)}</b></> : delta < 0 ? <>Refund to you: <b className="text-success">{money(-delta)}</b></> : 'No extra charge'}</span>
+                <button type="button" className={primary} disabled={!changed || busy} onClick={() => (delta > 0 && !unpaid ? setPayOpen(true) : apply())}>{delta > 0 && !unpaid ? `Continue to pay ${money(delta)}` : 'Save changes'}</button></div>
       {payOpen && delta > 0 && <form onSubmit={pay} noValidate className="page grid gap-3 rounded-xl border border-line p-3 sm:grid-cols-3">
         <div className="font-semibold sm:col-span-3">Pay {money(delta)} (simulation, no real charge)</div>
         <div className="flex flex-wrap gap-2 sm:col-span-3">{[['card', 'Card'], ['wallet', 'Wallet']].map(([k, l]) => <label key={k} className={ghost + (m === k ? ' !border-sky-brand text-sky-brand' : '') + ' cursor-pointer'}><input type="radio" name={'mpm' + b.ref} className="sr-only" checked={m === k} onChange={() => setM(k)} />{l}</label>)}</div>
